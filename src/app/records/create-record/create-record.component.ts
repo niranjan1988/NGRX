@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RecordsService } from '../records.service';
+import { Store } from '@ngrx/store';
+import { AddRecord } from '../store/records.actions';
 
 @Component({
   selector: 'app-create-record',
@@ -9,7 +10,7 @@ import { RecordsService } from '../records.service';
 })
 export class CreateRecordComponent implements OnInit {
   recordForm: FormGroup;
-  constructor(private recordService: RecordsService) { }
+  constructor(private store : Store<string>) { }
 
   ngOnInit(): void {
     this.recordForm = new FormGroup({
@@ -18,6 +19,7 @@ export class CreateRecordComponent implements OnInit {
   }
 
   AddRecord() {
-      this.recordService.recordsSubject.next(this.recordForm.value.name);
+      // this.recordService.recordsSubject.next(this.recordForm.value.name);
+      this.store.dispatch(new AddRecord(this.recordForm.value.name));
   }
 }

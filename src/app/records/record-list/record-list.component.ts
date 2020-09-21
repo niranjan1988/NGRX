@@ -11,7 +11,7 @@ import { RecordsService } from '../records.service';
 export class RecordListComponent implements OnInit {
   record: Observable<string>;
 
-  constructor(private recordService: RecordsService, public store: Store<{records:string}>) { }
+  constructor(public store: Store<{records:string}>) { }
 
   ngOnInit(): void {
     // this.recordService.recordsSubject.subscribe(res => {
